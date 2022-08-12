@@ -1,6 +1,6 @@
 import { prop, Ref } from "@typegoose/typegoose";
 import { Base, TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
-import { AlbumModel } from "src/album/album.model";
+import { AlbumModel } from "@album/album.model";
 import { ArtistModel } from "src/artist/artist.model";
 import { EpModel } from "src/ep/ep.model";
 import { PlaylistModel } from "src/playlist/playlist.model";

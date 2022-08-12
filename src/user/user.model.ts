@@ -1,8 +1,11 @@
 import { prop, Ref, Severity } from "@typegoose/typegoose";
 import { Base, TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
-import { LibraryModel } from "src/library/library.model";
+import { LibraryModel } from "../library/library.model";
 
-export type Role = "USER" | "ADMIN"
+export enum Role { 
+    user = "USER",
+    admin = "ADMIN"
+}
 
 export interface UserModel extends Base {}
 
@@ -16,7 +19,7 @@ export class UserModel extends TimeStamps{
     @prop({minlength: 8})
     password: string
 
-    @prop({allowMixed: Severity.ALLOW})
+    @prop({allowMixed: Severity.ALLOW, default: [Role.user]})
     roles: Role[]
 
     @prop({ref: () => LibraryModel})

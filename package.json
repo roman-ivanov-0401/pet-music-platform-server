@@ -25,11 +25,17 @@
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.8",
     "@nestjs/jwt": "^9.0.0",
+    "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@typegoose/typegoose": "^9.11.0",
+    "bcryptjs": "^2.4.3",
+    "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
+    "module-alias": "^2.2.2",
     "mongoose": "^6.5.1",
     "nestjs-typegoose": "^7.1.38",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"
@@ -37,11 +43,13 @@
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
-    "@nestjs/testing": "^9.0.0",
+    "@nestjs/testing": "^9.0.9",
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.13",
     "@types/jest": "28.1.4",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^16.0.0",
+    "@types/passport-jwt": "^3.0.6",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
@@ -73,6 +81,12 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^@album/(.*)$1": "<rootDir>/../src/album/$1"
+    }
+  },
+  "_moduleAliases": {
+    "@album": "./src/album" 
   }
 }

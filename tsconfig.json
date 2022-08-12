@@ -10,12 +10,29 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "paths": {
+      "@": ["./src"],
+      "@album/*": ["src/album/*"],
+      "@artist/*": ["src/artist/*"],
+      "@auth/*": ["src/auth/*"],
+      "@banner/*": ["src/banner/*"],
+      "@chart/*": ["src/chart/*"],
+      "@config/*": ["src/config/*"],
+      "@ep/*": ["src/ep/*"],
+      "@genre/*": ["src/genre/*"],
+      "@library/*": ["src/library/*"],
+      "@playlist/*": ["src/playlist/*"],
+      "@radio/*": ["src/radio/*"],
+      "@single/*": ["src/single/*"],
+      "@track/*": ["src/track/*"],
+      "@user/*": ["src/user/*"]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
   }
 }
