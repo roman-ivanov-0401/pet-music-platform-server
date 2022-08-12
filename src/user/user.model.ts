@@ -1,4 +1,4 @@
-import { prop, Ref } from "@typegoose/typegoose";
+import { prop, Ref, Severity } from "@typegoose/typegoose";
 import { Base, TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
 import { LibraryModel } from "src/library/library.model";
 
@@ -16,7 +16,7 @@ export class UserModel extends TimeStamps{
     @prop({minlength: 8})
     password: string
 
-    @prop()
+    @prop({allowMixed: Severity.ALLOW})
     roles: Role[]
 
     @prop({ref: () => LibraryModel})
