@@ -83,7 +83,7 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "moduleNameMapper": {
-      "^@album/(.*)$1": "<rootDir>/../src/album/$1"
+      "^@Album/(.*)": "<rootDir>/album/$1"
     }
   },
   "_moduleAliases": {

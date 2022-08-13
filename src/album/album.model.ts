@@ -1,8 +1,8 @@
 import { prop, Ref } from "@typegoose/typegoose";
 import { Base, TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
-import { ArtistModel } from "src/artist/artist.model";
-import { GenreModel } from "src/genre/genre.model";
-import { TrackModel } from "src/track/track.model";
+import { ArtistModel } from "../artist/artist.model";
+import { GenreModel } from "../genre/genre.model";
+import { TrackModel } from "../track/track.model";
 
 export interface AlbumModel extends Base{}
 

@@ -1,11 +1,11 @@
 import { prop, Ref } from "@typegoose/typegoose";
 import { Base, TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
-import { AlbumModel } from "@album/album.model";
-import { ArtistModel } from "src/artist/artist.model";
-import { EpModel } from "src/ep/ep.model";
-import { PlaylistModel } from "src/playlist/playlist.model";
-import { SingleModel } from "src/single/single.model";
-import { TrackModel } from "src/track/track.model";
+import { AlbumModel } from "../album/album.model";
+import { ArtistModel } from "../artist/artist.model";
+import { EpModel } from "../ep/ep.model";
+import { PlaylistModel } from "../playlist/playlist.model";
+import { SingleModel } from "../single/single.model";
+import { TrackModel } from "../track/track.model";
 
 export interface LibraryModel extends Base{}
 

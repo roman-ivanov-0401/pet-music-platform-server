@@ -12,7 +12,7 @@
     "baseUrl": "./",
     "paths": {
       "@": ["./src"],
-      "@album/*": ["src/album/*"],
+      "@Album/*": ["src/album/*"],
       "@artist/*": ["src/artist/*"],
       "@auth/*": ["src/auth/*"],
       "@banner/*": ["src/banner/*"],
