@@ -1,3 +1,4 @@
+import { LibraryService } from "../library/library.service";
 import { Injectable } from "@nestjs/common";
 import { ModelType } from "@typegoose/typegoose/lib/types";
 import { ObjectId } from "mongoose";
@@ -8,7 +9,8 @@ import { UserModel } from "./user.model";
 @Injectable()
 export class UserService {
 	constructor(
-		@InjectModel(UserModel) private readonly UserModel: ModelType<UserModel>
+		@InjectModel(UserModel) private readonly UserModel: ModelType<UserModel>,
+		private readonly LibraryService: LibraryService
 	) {}
 
     async getByEmail(email: string){
@@ -16,6 +18,7 @@ export class UserService {
     }
 
 	async create(dto: CreateUserDto) {
-		return await this.UserModel.create(dto);
+		const library = await this.LibraryService.create()
+		return await this.UserModel.create({...dto, library: library._id});
 	}
 }

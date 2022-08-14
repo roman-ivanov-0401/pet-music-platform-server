@@ -1,3 +1,4 @@
+import { LibraryModule } from '@library/library.module';
 import { Module } from '@nestjs/common';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { UserModel } from './user.model';
@@ -13,6 +14,7 @@ import { UserService } from './user.service';
 				},
 			},
 		]),
+		LibraryModule
 	],
   controllers: [],
   providers: [UserService],

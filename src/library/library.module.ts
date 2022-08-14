@@ -16,6 +16,7 @@ import { LibraryService } from './library.service';
 		]),
 	],
   controllers: [LibraryController],
-  providers: [LibraryService]
+  providers: [LibraryService],
+  exports: [LibraryService]
 })
 export class LibraryModule {}
