@@ -11,22 +11,24 @@ import { TypegooseModule } from "nestjs-typegoose";
 import { UserModel } from "../user/user.model";
 
 @Module({
-	imports: [
-		UserModule,
-		JwtModule.registerAsync({
-			imports: [ConfigModule],
-			inject: [ConfigService],
-			useFactory: getJWTConfig,
-		}),
-		TypegooseModule.forFeature([{
-			typegooseClass: UserModel,
-			schemaOptions: {
-				collection: "user"
-			}
-		}]),
-		ConfigModule
-	],
-	controllers: [AuthController],
-	providers: [AuthService, JwtStrategy],
+  imports: [
+    UserModule,
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: getJWTConfig,
+    }),
+    TypegooseModule.forFeature([
+      {
+        typegooseClass: UserModel,
+        schemaOptions: {
+          collection: "user",
+        },
+      },
+    ]),
+    ConfigModule,
+  ],
+  controllers: [AuthController],
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule {}

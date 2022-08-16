@@ -4,27 +4,27 @@ import { ArtistModel } from "../artist/artist.model";
 import { GenreModel } from "../genre/genre.model";
 import { TrackModel } from "../track/track.model";
 
-export interface SingleModel extends Base{}
+export interface SingleModel extends Base {}
 
-export class SingleModel extends TimeStamps{
-    @prop({required: true})
-    name: string
+export class SingleModel extends TimeStamps {
+  @prop({ required: true })
+  name: string;
 
-    @prop({default: [], ref: () => ArtistModel})
-    artists: Ref<ArtistModel>[]
+  @prop({ default: [], ref: () => ArtistModel })
+  artists: Ref<ArtistModel>[];
 
-    @prop()
-    cover: string
+  @prop()
+  cover: string;
 
-    @prop({required: true, ref: () => GenreModel})
-    genres: Ref<GenreModel>[]
+  @prop({ required: true, ref: () => GenreModel })
+  genres: Ref<GenreModel>[];
 
-    @prop({required: true})
-    releaseDate: Date
+  @prop({ required: true })
+  releaseDate: Date;
 
-    @prop({default: [], ref: () => TrackModel})
-    track: Ref<TrackModel>
+  @prop({ default: [], ref: () => TrackModel })
+  track: Ref<TrackModel>;
 
-    @prop({default: 0})
-    plays: number
+  @prop({ default: 0 })
+  plays: number;
 }

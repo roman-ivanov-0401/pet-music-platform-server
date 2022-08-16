@@ -4,24 +4,24 @@ import { AlbumModel } from "../album/album.model";
 import { EpModel } from "../ep/ep.model";
 import { SingleModel } from "../single/single.model";
 
-export interface ArtistModel extends Base{}
+export interface ArtistModel extends Base {}
 
-export class ArtistModel extends TimeStamps{
-    @prop({required: true})
-    name: string
+export class ArtistModel extends TimeStamps {
+  @prop({ required: true })
+  name: string;
 
-    @prop()
-    image: string
+  @prop()
+  image: string;
 
-    @prop({ref: () => AlbumModel})
-    albums: Ref<AlbumModel>[]
+  @prop({ ref: () => AlbumModel, default: [] })
+  albums: Ref<AlbumModel>[];
 
-    @prop({ref: () => EpModel})
-    eps: Ref<EpModel>[]
+  @prop({ ref: () => EpModel, default: [] })
+  eps: Ref<EpModel>[];
 
-    @prop({ref: SingleModel})
-    singles: Ref<SingleModel>[]
+  @prop({ ref: SingleModel, default: [] })
+  singles: Ref<SingleModel>[];
 
-    @prop()
-    followersCount: number
+  @prop({default: 0})
+  followersCount: number;
 }
