@@ -1,6 +1,5 @@
 import { Module } from "@nestjs/common";
 import { TypegooseModule } from "nestjs-typegoose";
-import { LibraryController } from "./library.controller";
 import { LibraryModel } from "./library.model";
 import { LibraryService } from "./library.service";
 
@@ -15,7 +14,6 @@ import { LibraryService } from "./library.service";
       },
     ]),
   ],
-  controllers: [LibraryController],
   providers: [LibraryService],
   exports: [LibraryService],
 })

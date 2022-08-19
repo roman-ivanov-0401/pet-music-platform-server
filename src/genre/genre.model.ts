@@ -4,6 +4,6 @@ import { Base, TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
 export interface GenreModel extends Base {}
 
 export class GenreModel extends TimeStamps {
-  @prop()
+  @prop({default: ""})
   name: string;
 }

@@ -7,23 +7,23 @@ import { TrackModel } from "../track/track.model";
 export interface AlbumModel extends Base {}
 
 export class AlbumModel extends TimeStamps {
-  @prop({ required: true })
+  @prop({ default: "" })
   name: string;
 
   @prop({ default: [], ref: () => ArtistModel })
   artists: Ref<ArtistModel>[];
 
-  @prop()
+  @prop({default: ""})
   cover: string;
 
-  @prop({ required: true, ref: () => GenreModel })
-  genres: Ref<GenreModel>;
+  @prop({ ref: () => GenreModel, default: [] })
+  genres: Ref<GenreModel>[];
 
-  @prop({ required: true })
+  @prop({ default: 0 })
   year: number;
 
   @prop({ default: [], ref: () => TrackModel })
-  tracks: Ref<TrackModel>;
+  tracks: Ref<TrackModel>[];
 
   @prop({ default: 0 })
   plays: number;

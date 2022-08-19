@@ -10,21 +10,21 @@ import { TrackModel } from "../track/track.model";
 export interface LibraryModel extends Base {}
 
 export class LibraryModel extends TimeStamps {
-  @prop({ ref: () => AlbumModel })
+  @prop({ ref: () => AlbumModel, default: [] })
   albums: Ref<AlbumModel>[];
 
-  @prop({ ref: () => PlaylistModel })
+  @prop({ ref: () => PlaylistModel, default: [] })
   playlists: Ref<PlaylistModel>[];
 
-  @prop({ ref: () => EpModel })
+  @prop({ ref: () => EpModel, default: [] })
   eps: Ref<EpModel>[];
 
-  @prop({ ref: () => SingleModel })
+  @prop({ ref: () => SingleModel, default: [] })
   singles: Ref<SingleModel>[];
 
-  @prop({ ref: () => TrackModel })
+  @prop({ ref: () => TrackModel, default: [] })
   favorites: Ref<TrackModel>[];
 
-  @prop({ ref: () => ArtistModel })
+  @prop({ ref: () => ArtistModel, default: [] })
   follows: Ref<ArtistModel>[];
 }

@@ -1,8 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { ModelType } from "@typegoose/typegoose/lib/types";
+import { ModelType, Ref } from "@typegoose/typegoose/lib/types";
+import { Types } from "mongoose";
 import { InjectModel } from "nestjs-typegoose";
 import { FileService } from "../file/file.service";
-import { CreateArtistDto, UpdateArtistDto } from "./artist.dto";
+import { UpdateArtistDto } from "./artist.dto";
 import { ArtistModel } from "./artist.model";
 
 @Injectable()
@@ -23,13 +24,9 @@ export class ArtistService {
     }
   }
 
-  async create(dto: CreateArtistDto, image: Express.Multer.File) {
+  async create() {
     try {
-      const { url } = (await this.fileService.saveFiles([image], "artists"))[0];
-      return this.artistModel.create({
-        ...dto,
-        image: url,
-      });
+      return await this.artistModel.create({})
     } catch (e) {
       throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -49,6 +46,26 @@ export class ArtistService {
       return await artist.save();
     } catch (e) {
       throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async follow(_id: Ref<ArtistModel, Types.ObjectId>){
+    try{
+      await this.artistModel.updateOne({_id}, {$inc: {followersCount: 1}})
+      return true
+    }
+    catch(e){
+      throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR)
+    }
+  }
+
+  async unfollow(_id: Ref<ArtistModel, Types.ObjectId>){
+    try{
+      await this.artistModel.updateOne({_id}, {$inc: {followersCount: -1}})
+      return true
+    }
+    catch(e){
+      throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
 

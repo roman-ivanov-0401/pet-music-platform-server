@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypegooseModule } from "nestjs-typegoose";
+import { FileService } from "src/file/file.service";
 import { EpController } from "./ep.controller";
 import { EpModel } from "./ep.model";
 import { EpService } from "./ep.service";
@@ -16,6 +17,6 @@ import { EpService } from "./ep.service";
     ]),
   ],
   controllers: [EpController],
-  providers: [EpService],
+  providers: [EpService, FileService],
 })
 export class EpModule {}

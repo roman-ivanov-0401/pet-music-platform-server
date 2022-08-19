@@ -16,8 +16,11 @@ import {
 } from "@nestjs/common";
 import { Role } from "../user/user.model";
 import { BannerService } from "./banner.service";
-import { CreateBannerDto, DeleteBannersDto, UpdateBannerDto } from "./banner.dto";
+import { DeleteBannersDto, UpdateBannerDto } from "./banner.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
+import { Ref } from "@typegoose/typegoose";
+import { BannerModel } from "./banner.model";
+import { Types } from "mongoose";
 
 @Controller("banners")
 export class BannerController {
@@ -33,16 +36,11 @@ export class BannerController {
     return this.bannerService.getNewest();
   }
 
-  @UsePipes(new ValidationPipe())
   @HttpCode(HttpStatus.OK)
   @Auth(Role.admin)
-  @UseInterceptors(FileInterceptor("image"))
   @Post("")
-  create(
-    @Body() dto: CreateBannerDto,
-    @UploadedFile() image: Express.Multer.File
-  ) {
-    return this.bannerService.create(dto, image);
+  create() {
+    return this.bannerService.create();
   }
 
   @UsePipes(new ValidationPipe())
@@ -53,7 +51,7 @@ export class BannerController {
   update(
     @Body() dto: UpdateBannerDto,
     @UploadedFile() image: Express.Multer.File,
-    @Param("_id") _id: string
+    @Param("_id") _id: Ref<BannerModel, Types.ObjectId>
   ) {
     return this.bannerService.update(_id, dto, image);
   }

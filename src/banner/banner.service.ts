@@ -1,8 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { ModelType } from "@typegoose/typegoose/lib/types";
+import { ModelType, Ref } from "@typegoose/typegoose/lib/types";
+import { Types } from "mongoose";
 import { InjectModel } from "nestjs-typegoose";
 import { FileService } from "../file/file.service";
-import { CreateBannerDto, UpdateBannerDto } from "./banner.dto";
+import { UpdateBannerDto } from "./banner.dto";
 import { BannerModel } from "./banner.model";
 
 @Injectable()
@@ -31,19 +32,15 @@ export class BannerService {
     }
   }
 
-  async create(dto: CreateBannerDto, image: Express.Multer.File) {
+  async create() {
     try {
-      const imageData = await this.fileService.saveFiles([image], "banners");
-      return await this.bannerModel.create({
-        ...dto,
-        image: imageData[0].url,
-      });
+      return await this.bannerModel.create({});
     } catch (e) {
       throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
-  async update(_id: string, dto: UpdateBannerDto, image: Express.Multer.File) {
+  async update(_id: Ref<BannerModel, Types.ObjectId>, dto: UpdateBannerDto, image: Express.Multer.File) {
     try {
       const banner = await this.bannerModel.findById(_id);
       if (image) {

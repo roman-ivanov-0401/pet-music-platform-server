@@ -5,7 +5,7 @@ import { TrackModel } from "../track/track.model";
 export interface RadioModel extends Base {}
 
 export class RadioModel extends TimeStamps {
-  @prop({ required: true })
+  @prop({ default: ""})
   name: string;
 
   @prop({ default: [], ref: () => TrackModel })

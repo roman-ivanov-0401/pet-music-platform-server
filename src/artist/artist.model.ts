@@ -7,10 +7,10 @@ import { SingleModel } from "../single/single.model";
 export interface ArtistModel extends Base {}
 
 export class ArtistModel extends TimeStamps {
-  @prop({ required: true })
+  @prop({ default: "" })
   name: string;
 
-  @prop()
+  @prop({ default: "" })
   image: string;
 
   @prop({ ref: () => AlbumModel, default: [] })

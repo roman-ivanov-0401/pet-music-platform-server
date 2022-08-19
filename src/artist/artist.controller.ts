@@ -7,6 +7,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  Patch,
   Post,
   Put,
   Query,
@@ -18,11 +19,13 @@ import {
 import { Role } from "../user/user.model";
 import { ArtistService } from "./artist.service";
 import {
-  CreateArtistDto,
   DeleteAtristsDto,
   UpdateArtistDto,
 } from "./artist.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
+import { Ref } from "@typegoose/typegoose";
+import { ArtistModel } from "./artist.model";
+import { Types } from "mongoose";
 
 @Controller("artists")
 export class ArtistController {
@@ -33,16 +36,11 @@ export class ArtistController {
     return this.artistService.getBySearchTerm(searchTerm);
   }
 
-  @UsePipes(new ValidationPipe())
   @HttpCode(HttpStatus.OK)
   @Auth(Role.admin)
-  @UseInterceptors(FileInterceptor("image"))
   @Post()
-  create(
-    @Body() dto: CreateArtistDto,
-    @UploadedFile() image: Express.Multer.File
-  ) {
-    return this.artistService.create(dto, image);
+  create() {
+    return this.artistService.create();
   }
 
   @UsePipes(new ValidationPipe())
@@ -56,6 +54,20 @@ export class ArtistController {
     @UploadedFile() image: Express.Multer.File
   ) {
     return this.artistService.update(_id, dto, image);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Auth(Role.user)
+  @Patch("follow/:_id")
+  follow(@Param("_id") _id: Ref<ArtistModel, Types.ObjectId>){
+    return this.artistService.follow(_id)
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Auth(Role.user)
+  @Patch("unfollow/:_id")
+  unfollow(@Param("_id") _id: Ref<ArtistModel, Types.ObjectId>){
+    return this.artistService.unfollow(_id)
   }
 
   @UsePipes(new ValidationPipe())

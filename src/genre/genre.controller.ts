@@ -4,14 +4,15 @@ import {
   Controller,
   Delete,
   Get,
-  Headers,
+  HttpCode,
+  HttpStatus,
   Param,
   Post,
   Put,
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common";
-import { CreateGenreDto, UpdateGenreDto } from "./genre.dto";
+import { DeleteGenresDto, UpdateGenreDto } from "./genre.dto";
 import { GenreService } from "./genre.service";
 import { Role } from "../user/user.model";
 
@@ -24,11 +25,11 @@ export class GenreController {
     return this.genreService.getAll();
   }
 
-  @UsePipes(new ValidationPipe())
+  @HttpCode(HttpStatus.OK)
   @Auth(Role.user)
   @Post("")
-  create(@Body() dto: CreateGenreDto) {
-    return this.genreService.create(dto);
+  create() {
+    return this.genreService.create();
   }
 
   @UsePipes(new ValidationPipe())
@@ -37,8 +38,9 @@ export class GenreController {
     return this.genreService.editById(_id, dto);
   }
 
-  @Delete(":_id")
-  deleteById(@Param("_id") _id: string) {
-    return this.genreService.deleteById(_id);
+  @UsePipes(new ValidationPipe())
+  @Delete()
+  deleteByIds(@Body() dto: DeleteGenresDto) {
+    return this.genreService.deleteById(dto._ids);
   }
 }

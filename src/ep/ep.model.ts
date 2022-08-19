@@ -7,20 +7,20 @@ import { TrackModel } from "../track/track.model";
 export interface EpModel extends Base {}
 
 export class EpModel extends TimeStamps {
-  @prop({ required: true })
+  @prop({ default: "" })
   name: string;
 
   @prop({ default: [], ref: () => ArtistModel })
   artists: Ref<ArtistModel>[];
 
-  @prop()
+  @prop({default: ""})
   cover: string;
 
-  @prop({ required: true, ref: () => GenreModel })
+  @prop({ ref: () => GenreModel, default: [] })
   genres: Ref<GenreModel>[];
 
-  @prop({ required: true })
-  releaseDate: Date;
+  @prop({ default: 0 })
+  year: number;
 
   @prop({ default: [], ref: () => TrackModel })
   tracks: Ref<TrackModel>[];

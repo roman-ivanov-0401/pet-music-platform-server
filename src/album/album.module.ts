@@ -1,9 +1,11 @@
 import { Module } from "@nestjs/common";
+import { TrackService } from "../track/track.service";
 import { TypegooseModule } from "nestjs-typegoose";
-import { FileService } from "../file/file.service";
+import { FileModule } from "../file/file.module";
 import { AlbumController } from "./album.controller";
 import { AlbumModel } from "./album.model";
 import { AlbumService } from "./album.service";
+import { FileService } from "../file/file.service";
 
 @Module({
   imports: [
@@ -14,7 +16,8 @@ import { AlbumService } from "./album.service";
           collection: "album",
         },
       },
-    ]),
+    ]), 
+    FileModule
   ],
   controllers: [AlbumController],
   providers: [AlbumService, FileService],
