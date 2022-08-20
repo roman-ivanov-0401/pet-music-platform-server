@@ -28,6 +28,11 @@ import { Ref } from "@typegoose/typegoose";
 export class EpController {
   constructor(private readonly epService: EpService) {}
 
+  @Get("/:_id")
+  getById(@Param("_id") _id: Ref<EpModel, Types.ObjectId>){
+    return this.epService.getById(_id)
+  }
+
   @Get()
   getBySearchTerm(@Query("searchTerm") searchTerm: string){
     return this.epService.getBySearchTerm(searchTerm)

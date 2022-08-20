@@ -28,6 +28,11 @@ import { Ref } from "@typegoose/typegoose";
 export class AlbumController {
   constructor(private readonly albumService: AlbumService) {}
 
+  @Get("/:_id")
+  getById(@Param("_id") _id: Ref<AlbumModel, Types.ObjectId>){
+    return this.albumService.getById(_id)
+  }
+
   @Get()
   getBySearchTerm(@Query("searchTerm") searchTerm: string){
     return this.albumService.getBySearchTerm(searchTerm)

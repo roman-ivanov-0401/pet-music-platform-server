@@ -3,6 +3,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   HttpCode,
   HttpStatus,
   Param,
@@ -25,6 +26,11 @@ import { UpdateTrackPipe } from "../pipes/exlipticContent.pipe";
 @Controller("tracks")
 export class TrackController {
   constructor(private readonly trackService: TrackService) {}
+
+  @Get("/:_id")
+  getById(@Param("_id") _id: Ref<TrackModel, Types.ObjectId>) {
+    return this.trackService.getById(_id);
+  }
 
   @HttpCode(HttpStatus.OK)
   @Auth(Role.admin)

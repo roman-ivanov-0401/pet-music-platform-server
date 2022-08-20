@@ -14,11 +14,15 @@ export class ArtistService {
     private readonly fileService: FileService
   ) {}
 
+  async getById(_id: Ref<ArtistModel, Types.ObjectId>) {
+    return await this.artistModel.findById(_id, "-__v -createdAt -updatedAt");
+  }
+
   async getBySearchTerm(searchTerm: string) {
     try {
       return await this.artistModel.find({
         name: { $regex: new RegExp(searchTerm, "i") },
-      });
+      }, "-__v -createdAt -updatedAt -albums -eps -singles");
     } catch (e) {
       throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -26,7 +30,7 @@ export class ArtistService {
 
   async create() {
     try {
-      return await this.artistModel.create({})
+      return await this.artistModel.create({});
     } catch (e) {
       throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -49,23 +53,27 @@ export class ArtistService {
     }
   }
 
-  async follow(_id: Ref<ArtistModel, Types.ObjectId>){
-    try{
-      await this.artistModel.updateOne({_id}, {$inc: {followersCount: 1}})
-      return true
-    }
-    catch(e){
-      throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR)
+  async follow(_id: Ref<ArtistModel, Types.ObjectId>) {
+    try {
+      await this.artistModel.updateOne(
+        { _id },
+        { $inc: { followersCount: 1 } }
+      );
+      return true;
+    } catch (e) {
+      throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
-  async unfollow(_id: Ref<ArtistModel, Types.ObjectId>){
-    try{
-      await this.artistModel.updateOne({_id}, {$inc: {followersCount: -1}})
-      return true
-    }
-    catch(e){
-      throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR)
+  async unfollow(_id: Ref<ArtistModel, Types.ObjectId>) {
+    try {
+      await this.artistModel.updateOne(
+        { _id },
+        { $inc: { followersCount: -1 } }
+      );
+      return true;
+    } catch (e) {
+      throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 

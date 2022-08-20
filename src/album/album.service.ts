@@ -13,6 +13,35 @@ export class AlbumService {
     private readonly fileService: FileService
   ) {}
 
+  async getById(_id: Ref<AlbumModel, Types.ObjectId>) {
+    return await this.albumModel
+      .findById(_id, "-__v -createdAt -updatedAt")
+      .populate([
+        {
+          path: "artists",
+          select: "-albums -eps -singles -__v -createdAt -updatedAt",
+        },
+        {
+          path: "genres",
+          select: "-__v -createdAt -updatedAt"
+        },
+        {
+          path: "tracks",
+          select: "-__v -createdAt -updatedAt -lyrics",
+          populate: [
+            {
+              path: "artists",
+              select: "name"
+            },
+            {
+              path: "feats",
+              select: "name"
+            }
+          ]
+        },
+      ]).exec();
+  }
+
   async getBySearchTerm(searchTerm: string) {
     try {
       return await this.albumModel

@@ -11,6 +11,23 @@ export class RadioService {
     @InjectModel(RadioModel) private readonly radioModel: ModelType<RadioModel>
   ) {}
 
+  async getById(_id: Ref<RadioModel, Types.ObjectId>) {
+    return await this.radioModel.findById(_id).populate({
+      path: "tracks",
+      select: "-__v -createdAt -updatedAt -lyrics",
+      populate: [
+        {
+          path: "artists",
+          select: "name",
+        },
+        {
+          path: "feats",
+          select: "name",
+        },
+      ],
+    });
+  }
+
   async getBySearchTerm(searchTerm: string) {
     try {
       return await this.radioModel

@@ -13,9 +13,14 @@ export class BannerService {
     private readonly bannerModel: ModelType<BannerModel>,
     private readonly fileService: FileService
   ) {}
+
+    async getById(_id: Ref<BannerModel, Types.ObjectId>){
+      return await this.bannerModel.findById(_id, "-__v -createdAt -updatedAt")
+    }
+
   async getAll() {
     try {
-      return await this.bannerModel.find();
+      return await this.bannerModel.find({}, "-__v -createdAt -updatedAt");
     } catch (e) {
       throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -23,7 +28,7 @@ export class BannerService {
   async getNewest() {
     try {
       return await this.bannerModel
-        .find()
+        .find({}, "-__v -createdAt -updatedAt")
         .sort({ createdAt: -1 })
         .limit(3)
         .exec();

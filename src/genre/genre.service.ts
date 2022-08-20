@@ -11,8 +11,12 @@ export class GenreService {
     @InjectModel(GenreModel) private readonly genreModel: ModelType<GenreModel>
   ) {}
 
+  async getById(_id: Ref<GenreModel, Types.ObjectId>) {
+    return await this.genreModel.findById(_id, "-__v -createdAt -updatedAt");
+  }
+
   async getAll() {
-    return await this.genreModel.find();
+    return await this.genreModel.find({}, "-__v -createdAt -updatedAt");
   }
   async create() {
     return await this.genreModel.create({});

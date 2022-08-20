@@ -5,12 +5,12 @@ import { TrackModel } from "../track/track.model";
 export interface ChartModel extends Base {}
 
 export class ChartModel extends TimeStamps {
-  @prop()
+  @prop({default: ""})
   name: string;
 
-  @prop()
+  @prop({default: ""})
   image: string;
 
-  @prop({ ref: () => TrackModel })
+  @prop({ ref: () => TrackModel, default: [] })
   tracks: Ref<TrackModel>[];
 }

@@ -28,6 +28,11 @@ import { Ref } from "@typegoose/typegoose";
 export class SingleController {
   constructor(private readonly singleService: SingleService) {}
 
+  @Get("/:_id")
+  getById(@Param("_id") _id: Ref<SingleModel, Types.ObjectId>){
+    return this.singleService.getById(_id)
+  }
+
   @Get()
   getBySearchTerm(@Query("searchTerm") searchTerm: string){
     return this.singleService.getBySearchTerm(searchTerm)

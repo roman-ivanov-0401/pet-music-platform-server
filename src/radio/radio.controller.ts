@@ -24,6 +24,11 @@ import { DeleteRadiosDto, UpdateRadioDto } from "./radio.dto";
 export class RadioController {
   constructor(private readonly radioService: RadioService) {}
 
+  @Get("/:_id")
+  getById(@Param("_id") _id: Ref<RadioModel, Types.ObjectId>) {
+    return this.radioService.getById(_id);
+  }
+
   @Get("")
   getBySearchTerm(@Query("searchTerm") searchTerm: string) {
     return this.radioService.getBySearchTerm(searchTerm);

@@ -18,10 +18,7 @@ import {
 } from "@nestjs/common";
 import { Role } from "../user/user.model";
 import { ArtistService } from "./artist.service";
-import {
-  DeleteAtristsDto,
-  UpdateArtistDto,
-} from "./artist.dto";
+import { DeleteAtristsDto, UpdateArtistDto } from "./artist.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { Ref } from "@typegoose/typegoose";
 import { ArtistModel } from "./artist.model";
@@ -30,6 +27,11 @@ import { Types } from "mongoose";
 @Controller("artists")
 export class ArtistController {
   constructor(private readonly artistService: ArtistService) {}
+
+  @Get("/:_id")
+  getById(@Param("_id") _id: Ref<ArtistModel, Types.ObjectId>) {
+    return this.artistService.getById(_id);
+  }
 
   @Get()
   getBySearchTerm(@Query("searchTerm") searchTerm: string) {
@@ -59,15 +61,15 @@ export class ArtistController {
   @HttpCode(HttpStatus.OK)
   @Auth(Role.user)
   @Patch("follow/:_id")
-  follow(@Param("_id") _id: Ref<ArtistModel, Types.ObjectId>){
-    return this.artistService.follow(_id)
+  follow(@Param("_id") _id: Ref<ArtistModel, Types.ObjectId>) {
+    return this.artistService.follow(_id);
   }
 
   @HttpCode(HttpStatus.OK)
   @Auth(Role.user)
   @Patch("unfollow/:_id")
-  unfollow(@Param("_id") _id: Ref<ArtistModel, Types.ObjectId>){
-    return this.artistService.unfollow(_id)
+  unfollow(@Param("_id") _id: Ref<ArtistModel, Types.ObjectId>) {
+    return this.artistService.unfollow(_id);
   }
 
   @UsePipes(new ValidationPipe())

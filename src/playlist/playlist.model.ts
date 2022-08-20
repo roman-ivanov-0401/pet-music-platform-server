@@ -6,13 +6,13 @@ import { UserModel } from "../user/user.model";
 export interface PlaylistModel extends Base {}
 
 export class PlaylistModel extends TimeStamps {
-  @prop({ required: true })
+  @prop({ default: "" })
   name: string;
 
-  @prop({ ref: () => UserModel })
-  author: Ref<UserModel>;
+  @prop({ ref: () => UserModel, default: [] })
+  author: Ref<UserModel>[];
 
-  @prop()
+  @prop({default: ""})
   image: string;
 
   @prop({ default: [], ref: () => TrackModel })

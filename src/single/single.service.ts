@@ -13,6 +13,35 @@ export class SingleService {
     private readonly fileService: FileService
   ) {}
 
+  async getById(_id: Ref<SingleModel, Types.ObjectId>) {
+    return await this.singleModel
+      .findById(_id, "-__v -createdAt -updatedAt")
+      .populate([
+        {
+          path: "artists",
+          select: "-albums -eps -singles -__v -createdAt -updatedAt",
+        },
+        {
+          path: "genres",
+          select: "-__v -createdAt -updatedAt"
+        },
+        {
+          path: "tracks",
+          select: "-__v -createdAt -updatedAt -lyrics",
+          populate: [
+            {
+              path: "artists",
+              select: "name"
+            },
+            {
+              path: "feats",
+              select: "name"
+            }
+          ]
+        },
+      ]).exec();
+  }
+
   async getBySearchTerm(searchTerm: string) {
     try {
       return await this.singleModel

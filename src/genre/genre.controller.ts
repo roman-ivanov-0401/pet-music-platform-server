@@ -15,10 +15,18 @@ import {
 import { DeleteGenresDto, UpdateGenreDto } from "./genre.dto";
 import { GenreService } from "./genre.service";
 import { Role } from "../user/user.model";
+import { Ref } from "@typegoose/typegoose";
+import { GenreModel } from "./genre.model";
+import { Types } from "mongoose";
 
 @Controller("genres")
 export class GenreController {
   constructor(private readonly genreService: GenreService) {}
+
+  @Get("/:_id")
+  getById(@Param("_id") _id: Ref<GenreModel, Types.ObjectId>) {
+    return this.genreService.getById(_id);
+  }
 
   @Get("")
   getAll() {

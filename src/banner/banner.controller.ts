@@ -36,6 +36,11 @@ export class BannerController {
     return this.bannerService.getNewest();
   }
 
+  @Get("/:_id")
+  getById(@Param("_id") _id: Ref<BannerModel, Types.ObjectId>){
+    return this.bannerService.getById(_id)
+  }
+
   @HttpCode(HttpStatus.OK)
   @Auth(Role.admin)
   @Post("")

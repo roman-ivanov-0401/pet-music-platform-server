@@ -14,6 +14,19 @@ export class TrackService {
     private readonly fileService: FileService
   ) {}
 
+  async getById(_id: Ref<TrackModel, Types.ObjectId>) {
+    return await this.trackModel.findById(_id, "-__v -createdAt -updatedAt").populate([
+      {
+        path: "artists",
+        select: "name",
+      },
+      {
+        path: "feats",
+        select: "name",
+      },
+    ]);
+  }
+
   async create() {
     try {
       return await this.trackModel.create({});
