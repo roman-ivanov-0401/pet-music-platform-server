@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypegooseModule } from "nestjs-typegoose";
-import { FileService } from "src/file/file.service";
+import { FileService } from "../file/file.service";
 import { SingleController } from "./single.controller";
 import { SingleModel } from "./single.model";
 import { SingleService } from "./single.service";
@@ -18,5 +18,6 @@ import { SingleService } from "./single.service";
   ],
   controllers: [SingleController],
   providers: [SingleService, FileService],
+  exports: [SingleService]
 })
 export class SingleModule {}

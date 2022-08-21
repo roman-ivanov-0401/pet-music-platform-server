@@ -21,5 +21,6 @@ import { FileService } from "../file/file.service";
   ],
   controllers: [AlbumController],
   providers: [AlbumService, FileService],
+  exports: [AlbumService]
 })
 export class AlbumModule {}

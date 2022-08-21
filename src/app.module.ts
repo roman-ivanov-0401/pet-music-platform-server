@@ -18,6 +18,8 @@ import { ChartModule } from "./chart/chart.module";
 import { RadioModule } from "./radio/radio.module";
 import { GenreModule } from "./genre/genre.module";
 import { FileModule } from './file/file.module';
+import { SearchModule } from './search/search.module';
+import { RecommendationsModule } from './recommendations/recommendations.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -40,6 +42,8 @@ import { FileModule } from './file/file.module';
     RadioModule,
     GenreModule,
     FileModule,
+    SearchModule,
+    RecommendationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

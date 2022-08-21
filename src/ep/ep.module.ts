@@ -18,5 +18,6 @@ import { EpService } from "./ep.service";
   ],
   controllers: [EpController],
   providers: [EpService, FileService],
+  exports: [EpService]
 })
 export class EpModule {}
